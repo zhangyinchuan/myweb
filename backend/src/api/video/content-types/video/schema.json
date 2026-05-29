@@ -1,0 +1,73 @@
+{
+  "kind": "collectionType",
+  "collectionName": "videos",
+  "info": {
+    "singularName": "video",
+    "pluralName": "videos",
+    "displayName": "视频推荐",
+    "description": "嵌入 B站或 YouTube 的视频推荐"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": false
+    },
+    "videoUrl": {
+      "type": "string",
+      "required": true,
+      "maxLength": 2048
+    },
+    "platform": {
+      "type": "enumeration",
+      "enum": ["bilibili", "youtube", "other"],
+      "required": true
+    },
+    "embedId": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255
+    },
+    "duration": {
+      "type": "string",
+      "maxLength": 20,
+      "required": false
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["draft", "published", "archived"],
+      "default": "draft",
+      "required": true
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "videos"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "inversedBy": "videos"
+    }
+  }
+}

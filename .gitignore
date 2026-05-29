@@ -1,0 +1,57 @@
+# ── Dependencies ──────────────────────────────────────────────────────────────
+node_modules/
+.pnpm-store/
+
+# ── Next.js ───────────────────────────────────────────────────────────────────
+.next/
+out/
+
+# ── Environment Variables (NEVER commit real secrets) ─────────────────────────
+.env
+.env.local
+.env.development
+.env.production
+.env.staging
+backend/.env
+backend/.env.local
+backend/.env.production
+
+# ── Strapi ────────────────────────────────────────────────────────────────────
+backend/.tmp/
+backend/build/
+backend/dist/
+backend/.strapi-updater.json
+
+# ── Build outputs ─────────────────────────────────────────────────────────────
+dist/
+build/
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ── OS ────────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDE ───────────────────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ── Testing ───────────────────────────────────────────────────────────────────
+coverage/
+.nyc_output/
+
+# ── Misc ──────────────────────────────────────────────────────────────────────
+.vercel
+.cache/
+*.tsbuildinfo
+migrate-claude.ps1
+web-access/

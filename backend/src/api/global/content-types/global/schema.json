@@ -1,0 +1,71 @@
+{
+  "kind": "singleType",
+  "collectionName": "globals",
+  "info": {
+    "singularName": "global",
+    "pluralName": "globals",
+    "displayName": "全局配置",
+    "description": "站点全局配置（单例）"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "siteName": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100,
+      "default": "我的个人网站"
+    },
+    "tagline": {
+      "type": "string",
+      "maxLength": 255,
+      "required": false
+    },
+    "githubUrl": {
+      "type": "string",
+      "maxLength": 2048,
+      "required": false
+    },
+    "twitterUrl": {
+      "type": "string",
+      "maxLength": 2048,
+      "required": false
+    },
+    "weiboUrl": {
+      "type": "string",
+      "maxLength": 2048,
+      "required": false
+    },
+    "bilibiliUrl": {
+      "type": "string",
+      "maxLength": 2048,
+      "required": false
+    },
+    "email": {
+      "type": "email",
+      "required": false
+    },
+    "footerText": {
+      "type": "string",
+      "maxLength": 500,
+      "required": false
+    },
+    "seoTitle": {
+      "type": "string",
+      "maxLength": 100,
+      "required": false
+    },
+    "seoDescription": {
+      "type": "string",
+      "maxLength": 255,
+      "required": false
+    },
+    "avatar": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    }
+  }
+}
