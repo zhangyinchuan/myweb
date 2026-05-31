@@ -50,7 +50,7 @@ const baseThemeOptions: ThemeOptions = {
   },
   typography: {
     fontFamily: [
-      'Inter',
+      'var(--font-geist)',
       '-apple-system',
       'BlinkMacSystemFont',
       '"PingFang SC"',
@@ -99,11 +99,9 @@ const baseThemeOptions: ThemeOptions = {
       styleOverrides: {
         root: {
           borderRadius: tokens.radius.md,
-          border: `1px solid`,
-          transition: 'box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 250ms cubic-bezier(0.4, 0, 0.2, 1)',
-          '&:hover': {
-            transform: 'translateY(-2px)',
-          },
+          border: 'none',
+          boxShadow: 'none',
+          transition: 'background-color 200ms cubic-bezier(0.4, 0, 0.2, 1)',
         },
       },
     },
@@ -145,129 +143,4 @@ const baseThemeOptions: ThemeOptions = {
       },
     },
   },
-};
-
-// ─── Light Theme ─────────────────────────────────────────────────────────────
-
-export const lightTheme = responsiveFontSizes(
-  createTheme({
-    ...baseThemeOptions,
-    palette: {
-      mode: 'light',
-      primary: {
-        main:         tokens.color.blue[600],
-        light:        tokens.color.blue[500],
-        dark:         tokens.color.blue[700],
-        contrastText: tokens.color.gray[0],
-      },
-      secondary: {
-        main:         tokens.color.gray[700],
-        light:        tokens.color.gray[500],
-        dark:         tokens.color.gray[900],
-        contrastText: tokens.color.gray[0],
-      },
-      text: {
-        primary:   tokens.color.gray[900],
-        secondary: tokens.color.gray[500],
-        disabled:  tokens.color.gray[400],
-      },
-      background: {
-        default: tokens.color.gray[0],
-        paper:   tokens.color.gray[50],
-      },
-      divider: tokens.color.gray[200],
-    },
-    components: {
-      ...baseThemeOptions.components,
-      MuiCard: {
-        ...baseThemeOptions.components?.MuiCard,
-        styleOverrides: {
-          root: {
-            ...(baseThemeOptions.components?.MuiCard?.styleOverrides as any)?.root,
-            borderColor: tokens.color.gray[200],
-            backgroundColor: tokens.color.gray[50],
-            '&:hover': {
-              transform: 'translateY(-2px)',
-              boxShadow: tokens.shadow.md,
-            },
-          },
-        },
-      },
-      MuiAppBar: {
-        ...baseThemeOptions.components?.MuiAppBar,
-        styleOverrides: {
-          root: {
-            ...(baseThemeOptions.components?.MuiAppBar?.styleOverrides as any)?.root,
-            backgroundColor: 'rgba(255,255,255,0.85)',
-            borderBottomColor: tokens.color.gray[100],
-            color: tokens.color.gray[900],
-          },
-        },
-      },
-    },
-  })
-);
-
-// ─── Dark Theme ───────────────────────────────────────────────────────────────
-
-export const darkTheme = responsiveFontSizes(
-  createTheme({
-    ...baseThemeOptions,
-    palette: {
-      mode: 'dark',
-      primary: {
-        main:         tokens.color.blue[400],
-        light:        tokens.color.blue[500],
-        dark:         tokens.color.blue[600],
-        contrastText: tokens.color.gray[950],
-      },
-      secondary: {
-        main:         tokens.color.gray[400],
-        light:        tokens.color.gray[300],
-        dark:         tokens.color.gray[600],
-        contrastText: tokens.color.gray[950],
-      },
-      text: {
-        primary:   tokens.color.gray[50],
-        secondary: tokens.color.gray[400],
-        disabled:  tokens.color.gray[600],
-      },
-      background: {
-        default: tokens.color.gray[950],
-        paper:   tokens.color.gray[900],
-      },
-      divider: tokens.color.gray[800],
-    },
-    components: {
-      ...baseThemeOptions.components,
-      MuiCard: {
-        ...baseThemeOptions.components?.MuiCard,
-        styleOverrides: {
-          root: {
-            ...(baseThemeOptions.components?.MuiCard?.styleOverrides as any)?.root,
-            borderColor: tokens.color.gray[800],
-            backgroundColor: tokens.color.gray[900],
-            '&:hover': {
-              transform: 'translateY(-2px)',
-              boxShadow: '0 4px 24px rgba(0,0,0,0.40), 0 2px 6px rgba(0,0,0,0.25)',
-            },
-          },
-        },
-      },
-      MuiAppBar: {
-        ...baseThemeOptions.components?.MuiAppBar,
-        styleOverrides: {
-          root: {
-            ...(baseThemeOptions.components?.MuiAppBar?.styleOverrides as any)?.root,
-            backgroundColor: 'rgba(10,10,10,0.85)',
-            borderBottomColor: tokens.color.gray[900],
-            color: tokens.color.gray[50],
-          },
-        },
-      },
-    },
-  })
-);
-
-export { tokens };
-export type AppTheme = typeof lightTheme;
+}
