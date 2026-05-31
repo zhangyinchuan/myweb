@@ -32,7 +32,11 @@
     },
     "platform": {
       "type": "enumeration",
-      "enum": ["bilibili", "youtube", "other"],
+      "enum": [
+        "bilibili",
+        "youtube",
+        "other"
+      ],
       "required": true
     },
     "embedId": {
@@ -45,17 +49,13 @@
       "maxLength": 20,
       "required": false
     },
-    "status": {
-      "type": "enumeration",
-      "enum": ["draft", "published", "archived"],
-      "default": "draft",
-      "required": true
-    },
     "thumbnail": {
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "category": {
       "type": "relation",
