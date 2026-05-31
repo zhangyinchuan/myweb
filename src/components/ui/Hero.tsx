@@ -1,11 +1,7 @@
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
-import type { SxProps, Theme } from '@mui/material/styles';
-
-// ─── Types ────────────────────────────────────────────────────────────────────
 
 interface SocialLink {
   label: string;
@@ -20,130 +16,100 @@ interface HeroProps {
   socialLinks?: SocialLink[];
 }
 
-// ─── Styles ───────────────────────────────────────────────────────────────────
-
-const styles: Record<string, SxProps<Theme>> = {
-  section: {
-    minHeight: { xs: '60vh', md: '80vh' },
-    display: 'flex',
-    alignItems: 'center',
-    py: { xs: 10, md: 16 },
-  },
-  inner: {
-    display: 'flex',
-    flexDirection: { xs: 'column', md: 'row-reverse' },
-    alignItems: 'center',
-    gap: { xs: 6, md: 10 },
-    width: '100%',
-  },
-  avatarWrapper: {
-    flexShrink: 0,
-  },
-  avatar: {
-    width: { xs: 120, md: 160 },
-    height: { xs: 120, md: 160 },
-    borderRadius: '50%',
-    objectFit: 'cover',
-    backgroundColor: 'action.hover',
-    boxShadow: '0 4px 24px rgba(0,0,0,0.10)',
-  },
-  avatarPlaceholder: {
-    width: { xs: 120, md: 160 },
-    height: { xs: 120, md: 160 },
-    borderRadius: '50%',
-    backgroundColor: 'action.hover',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  content: {
-    flex: 1,
-    maxWidth: 600,
-  },
-  name: {
-    fontWeight: 700,
-    fontSize: { xs: '2.5rem', md: '3.75rem' },
-    lineHeight: 1.1,
-    letterSpacing: '-0.025em',
-    color: 'text.primary',
-    mb: 2,
-  },
-  tagline: {
-    fontSize: { xs: '1.125rem', md: '1.375rem' },
-    color: 'text.secondary',
-    lineHeight: 1.6,
-    mb: 4,
-    maxWidth: 480,
-  },
-  socialRow: {
-    display: 'flex',
-    gap: 0.5,
-    flexWrap: 'wrap',
-  },
-  socialButton: {
-    color: 'text.secondary',
-    p: 1,
-    borderRadius: 1.5,
-    border: '1px solid',
-    borderColor: 'divider',
-    '&:hover': {
-      color: 'text.primary',
-      borderColor: 'text.secondary',
-      backgroundColor: 'action.hover',
-    },
-    transition: 'all 150ms cubic-bezier(0.4, 0, 0.2, 1)',
-  },
-};
-
-// ─── Component ────────────────────────────────────────────────────────────────
-
-/**
- * Hero — 首页 Hero 区
- *
- * 展示站长头像、名字、一句话简介、社交链接。
- * 移动端竖排，桌面端图片在右、文字在左。
- *
- * @example
- * <Hero
- *   name="张三"
- *   tagline="记录思考，分享所得。热爱技术与阅读。"
- *   avatarUrl="https://cdn.example.com/avatar.jpg"
- *   socialLinks={[{ label: 'GitHub', href: '...', icon: <GitHubIcon /> }]}
- * />
- */
 export function Hero({ name, tagline, avatarUrl, socialLinks = [] }: HeroProps) {
   return (
-    <Box component="section" sx={styles.section} aria-label="个人简介">
+    <Box
+      component="section"
+      aria-label="个人简介"
+      sx={{
+        minHeight: { xs: 'auto', md: '72vh' },
+        display: 'flex',
+        alignItems: 'center',
+        py: { xs: 12, md: 0 },
+      }}
+    >
       <Container>
-        <Box sx={styles.inner}>
-          {/* Avatar */}
-          <Box sx={styles.avatarWrapper}>
-            {avatarUrl ? (
-              <Box
-                component="img"
-                src={avatarUrl}
-                alt={name ? `${name} 的头像` : '站长头像'}
-                sx={styles.avatar}
-              />
-            ) : (
-              <Box sx={styles.avatarPlaceholder} aria-hidden />
-            )}
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row-reverse' },
+            alignItems: { xs: 'flex-start', md: 'center' },
+            gap: { xs: 8, md: 12 },
+          }}
+        >
+          {/* Avatar — double-bezel */}
+          <Box sx={{ flexShrink: 0, alignSelf: { xs: 'center', md: 'flex-start' }, mt: { md: 1 } }}>
+            <Box
+              sx={{
+                p: '5px',
+                borderRadius: '50%',
+                border: '1px solid',
+                borderColor: 'divider',
+                backgroundColor: 'action.hover',
+              }}
+            >
+              {avatarUrl ? (
+                <Box
+                  component="img"
+                  src={avatarUrl}
+                  alt={name ? `${name} 的头像` : '站长头像'}
+                  sx={{
+                    width: { xs: 100, md: 140 },
+                    height: { xs: 100, md: 140 },
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                    display: 'block',
+                    boxShadow: '0 2px 16px rgba(0,0,0,0.10)',
+                  }}
+                />
+              ) : (
+                <Box
+                  aria-hidden
+                  sx={{
+                    width: { xs: 100, md: 140 },
+                    height: { xs: 100, md: 140 },
+                    borderRadius: '50%',
+                    backgroundColor: 'action.selected',
+                  }}
+                />
+              )}
+            </Box>
           </Box>
 
-          {/* Text content */}
-          <Box sx={styles.content}>
+          {/* Text */}
+          <Box sx={{ flex: 1, maxWidth: 560 }}>
             {name && (
-              <Typography component="h1" sx={styles.name}>
+              <Typography
+                component="h1"
+                sx={{
+                  fontWeight: 700,
+                  fontSize: { xs: '2.25rem', md: '3.5rem' },
+                  lineHeight: 1.1,
+                  letterSpacing: '-0.03em',
+                  color: 'text.primary',
+                  mb: 2.5,
+                }}
+              >
                 {name}
               </Typography>
             )}
 
             {tagline && (
-              <Typography sx={styles.tagline}>{tagline}</Typography>
+              <Typography
+                sx={{
+                  fontSize: { xs: '1.0625rem', md: '1.25rem' },
+                  color: 'text.secondary',
+                  lineHeight: 1.65,
+                  mb: socialLinks.length > 0 ? 5 : 0,
+                  maxWidth: 440,
+                }}
+              >
+                {tagline}
+              </Typography>
             )}
 
             {socialLinks.length > 0 && (
-              <Box sx={styles.socialRow} aria-label="社交媒体">
+              <Box aria-label="社交媒体" sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
                 {socialLinks.map((social) => (
                   <IconButton
                     key={social.href}
@@ -152,8 +118,21 @@ export function Hero({ name, tagline, avatarUrl, socialLinks = [] }: HeroProps) 
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    sx={styles.socialButton}
                     size="small"
+                    sx={{
+                      color: 'text.secondary',
+                      p: '7px',
+                      borderRadius: 1.5,
+                      border: '1px solid',
+                      borderColor: 'divider',
+                      transition: 'color 150ms, border-color 150ms, background-color 150ms',
+                      '&:hover': {
+                        color: 'text.primary',
+                        borderColor: 'text.secondary',
+                        backgroundColor: 'action.hover',
+                      },
+                      '&:active': { transform: 'scale(0.97)' },
+                    }}
                   >
                     {social.icon}
                   </IconButton>
