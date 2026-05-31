@@ -83,3 +83,7 @@ export interface ListQueryParams {
   tagSlug?: string | null;
   sort?: string;
 }
+
+// Aliases used in older components
+export type { Category as StrapiCategory } from './generated/api';
+export type { Tag as StrapiTag } from './generated/api';
