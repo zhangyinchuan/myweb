@@ -3,8 +3,8 @@ import type {
   Video,
   Book,
   Global,
-  StrapiCategory,
-  StrapiTag,
+  Category,
+  Tag,
   StrapiListResponse,
   StrapiSingleResponse,
   ListQueryParams,
@@ -58,7 +58,7 @@ function buildListParams(
     'pagination[page]': String(page),
     'pagination[pageSize]': String(pageSize),
     'sort': sort,
-    'filters[status][$eq]': 'published',
+    'status': 'published',
   };
 
   populate.forEach((p, i) => {
@@ -86,7 +86,7 @@ export async function getBlogs(query: ListQueryParams = {}): Promise<StrapiListR
 export async function getBlogBySlug(slug: string): Promise<Blog | null> {
   const res = await strapiRequest<StrapiListResponse<Blog>>('/blogs', {
     'filters[slug][$eq]': slug,
-    'filters[status][$eq]': 'published',
+    'status': 'published',
     'populate[0]': 'cover',
     'populate[1]': 'category',
     'populate[2]': 'tags',
@@ -110,7 +110,7 @@ export async function getVideos(query: ListQueryParams = {}): Promise<StrapiList
 export async function getVideoBySlug(slug: string): Promise<Video | null> {
   const res = await strapiRequest<StrapiListResponse<Video>>('/videos', {
     'filters[slug][$eq]': slug,
-    'filters[status][$eq]': 'published',
+    'status': 'published',
     'populate[0]': 'thumbnail',
     'populate[1]': 'category',
     'populate[2]': 'tags',
@@ -134,7 +134,7 @@ export async function getBooks(query: ListQueryParams = {}): Promise<StrapiListR
 export async function getBookBySlug(slug: string): Promise<Book | null> {
   const res = await strapiRequest<StrapiListResponse<Book>>('/books', {
     'filters[slug][$eq]': slug,
-    'filters[status][$eq]': 'published',
+    'status': 'published',
     'populate[0]': 'cover',
     'populate[1]': 'category',
     'populate[2]': 'tags',
@@ -161,8 +161,8 @@ export async function getGlobal(): Promise<Global | null> {
 
 export async function getCategoriesByType(
   type: 'blog' | 'video' | 'book'
-): Promise<StrapiCategory[]> {
-  const res = await strapiRequest<StrapiListResponse<StrapiCategory>>('/categories', {
+): Promise<Category[]> {
+  const res = await strapiRequest<StrapiListResponse<Category>>('/categories', {
     'filters[type][$eq]': type,
     'sort': 'name:asc',
     'pagination[pageSize]': '100',
@@ -172,10 +172,9 @@ export async function getCategoriesByType(
 
 export async function getTagsForContentType(
   contentType: 'blogs' | 'videos' | 'books'
-): Promise<StrapiTag[]> {
+): Promise<Tag[]> {
   // Fetch tags used in published content of the given type
-  const res = await strapiRequest<StrapiListResponse<StrapiTag>>('/tags', {
-    [`filters[${contentType}][status][$eq]`]: 'published',
+  const res = await strapiRequest<StrapiListResponse<Tag>>('/tags', {
     'sort': 'name:asc',
     'pagination[pageSize]': '200',
   });
@@ -186,7 +185,7 @@ export async function getTagsForContentType(
 
 export async function getAllBlogSlugs(): Promise<string[]> {
   const res = await strapiRequest<StrapiListResponse<Pick<Blog, 'slug'>>>('/blogs', {
-    'filters[status][$eq]': 'published',
+    'status': 'published',
     'fields[0]': 'slug',
     'pagination[pageSize]': '1000',
   });
@@ -195,7 +194,7 @@ export async function getAllBlogSlugs(): Promise<string[]> {
 
 export async function getAllVideoSlugs(): Promise<string[]> {
   const res = await strapiRequest<StrapiListResponse<Pick<Video, 'slug'>>>('/videos', {
-    'filters[status][$eq]': 'published',
+    'status': 'published',
     'fields[0]': 'slug',
     'pagination[pageSize]': '1000',
   });
@@ -204,7 +203,7 @@ export async function getAllVideoSlugs(): Promise<string[]> {
 
 export async function getAllBookSlugs(): Promise<string[]> {
   const res = await strapiRequest<StrapiListResponse<Pick<Book, 'slug'>>>('/books', {
-    'filters[status][$eq]': 'published',
+    'status': 'published',
     'fields[0]': 'slug',
     'pagination[pageSize]': '1000',
   });
