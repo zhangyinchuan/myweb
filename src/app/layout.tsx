@@ -1,14 +1,14 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Geist } from 'next/font/google';
 import { AppThemeProvider } from '@/theme/ThemeProvider';
 import { Navbar } from '@/components/ui/Navbar';
 import { Footer } from '@/components/ui/Footer';
 import { getGlobal } from '@/lib/strapi';
 
-const inter = Inter({
+const geist = Geist({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter',
+  variable: '--font-geist',
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -27,7 +27,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const global = await getGlobal();
 
   return (
-    <html lang="zh-CN" className={inter.variable} suppressHydrationWarning>
+    <html lang="zh-CN" className={geist.variable} suppressHydrationWarning>
       <body>
         <AppThemeProvider>
           <Navbar siteName={global?.siteName ?? '个人站点'} />
