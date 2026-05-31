@@ -62,6 +62,7 @@ export interface RichTextNode {
   level?: number | null;
   format?: "ordered" | "unordered" | null;
   children?: RichTextNode[] | null;
+  image?: StrapiImage | null;
 }
 
 export type RichTextContent = RichTextNode[];
@@ -98,7 +99,6 @@ export interface BlogListItem {
   /** 预估阅读时长（分钟） */
   readingTime: number;
   viewCount: number;
-  status: ContentStatus;
   /** ISO 8601 date-time */
   publishedAt?: string | null;
   /** ISO 8601 date-time */
@@ -129,7 +129,6 @@ export interface Video {
   embedId: string;
   /** 视频时长，格式 HH:MM:SS */
   duration?: string | null;
-  status: ContentStatus;
   /** ISO 8601 date-time */
   publishedAt?: string | null;
   /** ISO 8601 date-time */
@@ -156,7 +155,6 @@ export interface Book {
   /** 读书笔记富文本 */
   notes?: RichTextContent | null;
   rating?: BookRating | null;
-  status: ContentStatus;
   /** ISO 8601 date-time */
   publishedAt?: string | null;
   /** ISO 8601 date-time */
@@ -226,7 +224,7 @@ export interface GetBlogsRequest {
   sort?: string;
   "filters[category][slug][$eq]"?: string;
   "filters[tags][slug][$eq]"?: string;
-  "filters[status][$eq]"?: ContentStatus;
+  "status"?: "published" | "draft";
 }
 
 export interface GetBlogBySlugRequest {
@@ -318,7 +316,6 @@ export function isBlogListItem(value: unknown): value is BlogListItem {
     typeof (value as any).title === "string" &&
     "slug" in value &&
     typeof (value as any).slug === "string" &&
-    "status" in value &&
     (["draft", "published", "archived"] as string[]).includes((value as any).status)
   );
 }
@@ -400,7 +397,6 @@ export function isApiError(value: unknown): value is ApiError {
   return (
     typeof value === "object" &&
     value !== null &&
-    "status" in value &&
     typeof (value as any).status === "number" &&
     "error" in value &&
     typeof (value as any).error === "string"
