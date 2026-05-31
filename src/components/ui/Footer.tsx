@@ -46,13 +46,14 @@ const styles: Record<string, SxProps<Theme>> = {
   brand: {
     fontWeight: 700,
     fontSize: '1rem',
-    letterSpacing: '-0.01em',
+    letterSpacing: '-0.02em',
     color: 'text.primary',
     mb: 0.5,
   },
   footerText: {
     fontSize: '0.75rem',
     color: 'text.secondary',
+    maxWidth: 300,
   },
   navLinks: {
     display: 'flex',
@@ -76,10 +77,7 @@ const styles: Record<string, SxProps<Theme>> = {
     p: 0.75,
   },
   copyright: {
-    mt: 4,
-    pt: 4,
-    borderTop: '1px solid',
-    borderColor: 'divider',
+    mt: 6,
     display: 'flex',
     flexDirection: { xs: 'column', sm: 'row' },
     justifyContent: 'space-between',
